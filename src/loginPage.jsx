@@ -6,7 +6,6 @@ export default function LoginPage({setUserLogin, loginUsername, setLoginUsername
 
     function CheckLoginDetail() {
         let info = JSON.parse(localStorage.getItem(loginUsername))
-        console.log(info)
         info.password === loginPassword ? setUserLogin("4") : alert(false)
     }
 
