@@ -1,34 +1,45 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import HomePage from './homePage'
+import LoginPage from './loginPage'
+import SiginPage from './signinPage'
+import DisplayVehicle from './vehicleDisplay' 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userLogin, setUserLogin] = useState("0");
+  const [loginUsername, setLoginUsername] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [saveDetails, setSaveDetails] = useState("")
+  const [vehicleStatus, setVehicleStatus] = useState("0")
+
+  const setters = {
+    setUsername,
+    setPassword,
+    setEmail,
+    setFirstName,
+    setLastName
+  }
+
+  const state = {
+    username,
+    password,
+    email,
+    firstName,
+    lastName
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div id="mainSection">
+      {userLogin === "0" && <HomePage setUserLogin={setUserLogin}/>}
+      {userLogin === "1" && <LoginPage setUserLogin={setUserLogin} loginUsername={loginUsername} setLoginUsername={setLoginUsername} loginPassword={loginPassword} setLoginPassword={setLoginPassword} />}
+      {userLogin === "2" && <SiginPage {...setters} {...state} saveDetails={saveDetails} setSaveDetails={setSaveDetails} setUserLogin={setUserLogin} />}
+      {userLogin === "4" && <DisplayVehicle vehicleStatus={vehicleStatus} setVehicleStatus={setVehicleStatus} />}
+    </div>
   )
 }
 
